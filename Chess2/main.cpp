@@ -14,6 +14,7 @@
 #include <string>
 #include <cctype>
 #include "Piece.cpp"
+#include "pgnFile.hpp"
 
 using namespace std;
 
@@ -36,6 +37,8 @@ int bishop_moves(unsigned int newX, unsigned int newY, int isWhite, int* oldX, i
 // main function
 int main() {
     initialize();
+    pgnFile pgnObject;
+    pgnObject.saveGame();
     printBoard();
     while (1){
         move(1);
@@ -384,7 +387,6 @@ void move(int isWhite){
                 } // end of queen move
                 else if (move[0] == 'K'){ // king move
                     isLegal = 1;
-                    float value = 1000;
                     if (move[1] == 'x'){ // if captures
                         newX = (int(move[2]) - 96);
                         newY = (int(move[3]) - 48);
@@ -409,6 +411,9 @@ void move(int isWhite){
             isLegal = error(10);
         }
     } // end of while is legal
+    // TODO: WRITE MOVE TO FILE
+    
+    
     cout << oldX << oldY << endl;
     emptySquare(oldX, oldY);
     chessboard[newX][newY].define(1, isWhite, ((10*newY)+newX), piece, value);
