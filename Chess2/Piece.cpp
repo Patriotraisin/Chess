@@ -1,6 +1,5 @@
 #include "Piece.hpp"
 
-
 Piece::Piece(){
     pieceType = 0;
     parity = 0;

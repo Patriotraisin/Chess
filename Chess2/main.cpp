@@ -27,17 +27,17 @@ int gameEnded = 0;
 
 // main function
 int main() {
-    CB.initialize();
+    //CB.initialize();
     pgnFile pgnObject;
     pgnObject.saveGame();
-    CB.printBoard();
-    while (1){
+    //CB.printBoard();
+    /*while (1){
         CB.move(1);
         CB.printBoard();
         CB.move(-1);
         CB.printBoard();
     }
-    
+    */
     return 0;
 }
 
