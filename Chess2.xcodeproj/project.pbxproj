@@ -10,6 +10,9 @@
 		049539CB248785200061D29D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539CA248785200061D29D /* main.cpp */; };
 		049539D3248785DA0061D29D /* Piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539D1248785DA0061D29D /* Piece.cpp */; };
 		04C9EBFE250DD29200D01513 /* pgnFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EBFC250DD29200D01513 /* pgnFile.cpp */; };
+		04C9EC01250E2E4800D01513 /* Chessboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EBFF250E2E4800D01513 /* Chessboard.cpp */; };
+		04C9EC04250E305600D01513 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EC02250E305600D01513 /* Player.cpp */; };
+		04C9EC07250E32DC00D01513 /* Arbiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EC05250E32DC00D01513 /* Arbiter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +34,12 @@
 		049539D2248785DA0061D29D /* Piece.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Piece.hpp; sourceTree = "<group>"; };
 		04C9EBFC250DD29200D01513 /* pgnFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pgnFile.cpp; sourceTree = "<group>"; };
 		04C9EBFD250DD29200D01513 /* pgnFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pgnFile.hpp; sourceTree = "<group>"; };
+		04C9EBFF250E2E4800D01513 /* Chessboard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Chessboard.cpp; sourceTree = "<group>"; };
+		04C9EC00250E2E4800D01513 /* Chessboard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Chessboard.hpp; sourceTree = "<group>"; };
+		04C9EC02250E305600D01513 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		04C9EC03250E305600D01513 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		04C9EC05250E32DC00D01513 /* Arbiter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Arbiter.cpp; sourceTree = "<group>"; };
+		04C9EC06250E32DC00D01513 /* Arbiter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Arbiter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +77,12 @@
 				049539D2248785DA0061D29D /* Piece.hpp */,
 				04C9EBFC250DD29200D01513 /* pgnFile.cpp */,
 				04C9EBFD250DD29200D01513 /* pgnFile.hpp */,
+				04C9EBFF250E2E4800D01513 /* Chessboard.cpp */,
+				04C9EC00250E2E4800D01513 /* Chessboard.hpp */,
+				04C9EC05250E32DC00D01513 /* Arbiter.cpp */,
+				04C9EC06250E32DC00D01513 /* Arbiter.hpp */,
+				04C9EC02250E305600D01513 /* Player.cpp */,
+				04C9EC03250E305600D01513 /* Player.hpp */,
 			);
 			path = Chess2;
 			sourceTree = "<group>";
@@ -129,8 +144,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				049539D3248785DA0061D29D /* Piece.cpp in Sources */,
+				04C9EC07250E32DC00D01513 /* Arbiter.cpp in Sources */,
+				04C9EC01250E2E4800D01513 /* Chessboard.cpp in Sources */,
 				04C9EBFE250DD29200D01513 /* pgnFile.cpp in Sources */,
 				049539CB248785200061D29D /* main.cpp in Sources */,
+				04C9EC04250E305600D01513 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
