@@ -10,6 +10,8 @@
 
 // set monospace font
 
+#define MOVES 3
+
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -23,21 +25,34 @@ using namespace std;
 
 // global variable chessboard; other variables
 Chessboard CB;
-int gameEnded = 0;
-
+int moveCounter = 1;
 // main function
 int main() {
-    //CB.initialize();
+    string gameLog = "";
+    //
+    int gameEnded = 0;
+    CB.initialize();
     pgnFile pgnObject;
-    pgnObject.saveGame();
-    //CB.printBoard();
-    /*while (1){
-        CB.move(1);
+    //
+    CB.printBoard();
+    //
+    //cout << gameEnded << "D" << endl;
+    while (gameEnded == 0){
+        gameLog.append(to_string(moveCounter) + ". ");
+        gameLog.append(CB.move(1) + " ");
         CB.printBoard();
-        CB.move(-1);
+        gameLog.append(CB.move(-1) + " ");
         CB.printBoard();
+        ++moveCounter;
+        //
+        if (moveCounter == (MOVES+1)){
+            gameEnded = 1;
+        }
+        //
     }
-    */
+    cout << gameLog << endl;
+    pgnObject.saveGame(gameLog);
+    //
     return 0;
 }
 

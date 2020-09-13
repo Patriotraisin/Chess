@@ -16,7 +16,7 @@ public:
     pgnFile();
     void setRound(int);
     
-    void saveGame();
+    void saveGame(std::string);
 };
 
 #endif /* pgnFile_hpp */

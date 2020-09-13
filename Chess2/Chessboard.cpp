@@ -81,7 +81,7 @@ void Chessboard::initialize(){
         }
 }
 
-void Chessboard::move(int isWhite){
+string Chessboard::move(int isWhite){
     string move;
     string piece;
     float value = 0;
@@ -348,7 +348,7 @@ void Chessboard::move(int isWhite){
     emptySquare(oldX, oldY);
     chessboard[newX][newY].define(1, isWhite, ((10*newY)+newX), piece, value);
     
-    
+    return move;
     
 } // end of void move
 

@@ -20,7 +20,7 @@ public:
     
     
     void debug(std::string move);
-    void move(int isWhite);
+    std::string move(int isWhite);
     int knight_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int *oldY);
     int bishop_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY);
 };

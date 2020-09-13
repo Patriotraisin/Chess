@@ -3,6 +3,7 @@
 #include <ctime>
 #include <string>
 
+
 pgnFile::pgnFile(){
     result = 0;
     gameTerminated = false;
@@ -21,7 +22,7 @@ void pgnFile::setRound(int gameRound){
     round = gameRound;
 }
 
-void pgnFile::saveGame(){
+void pgnFile::saveGame(std::string gameLog){
     time_t now = time(0);
     tm *ltm = localtime(&now);
     // TODO:
@@ -50,8 +51,10 @@ void pgnFile::saveGame(){
     << "\n"
                   << "[Site \""           << site << "\"] "
     << "\n"
-                  << "[White \""          << whiteName << "\"]\n"
+                  << "[White \""          << whiteName << "\"]\n\n"
     ;
+    // print actual game
+    pgnFileHandle << gameLog;
     // close file
     pgnFileHandle.close();
     // throw exception if issue found
