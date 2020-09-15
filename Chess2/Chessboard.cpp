@@ -1,6 +1,17 @@
 #include "Piece.hpp"
 #include "Chessboard.hpp"
 #include "Arbiter.hpp"
+#include "Player.hpp"
+
+#include "Pawn.hpp"
+#include "Knight.hpp"
+#include "Bishop.hpp"
+#include "Rook.hpp"
+#include "Queen.hpp"
+#include "King.hpp"
+
+#include <cmath>
+#include <math.h>
 
 Chessboard::Chessboard(){
 }
@@ -9,7 +20,7 @@ void Chessboard::emptySquare(int x, int y){
     chessboard[x][y].define(0, 0, ((10*y)+x), "  ", 0);
 }
 
-void Chessboard::printBoard(){
+void Chessboard::printBoard() const{
     cout << "\n\n\n\n" << endl;
     for (int y = 8; y >=1; y--){
         cout << " ==================================" << endl;
@@ -91,31 +102,16 @@ string Chessboard::move(int isWhite){
     bool isLegal = 0;
     int newX = 0, newY = 0, oldX = 0, oldY = 0; // positional variables
     
-    // pawn variable
-    if (isWhite == 1){
-        pawnVar = 1;
-    }
-    else if (isWhite == -1){
-        pawnVar = 8;
-    }
+    Pawn::setPawnPresets(isWhite, &pawnUpperBound, &pawnLowerBound, &piece, &pawnVar);
+
     // end of pawn variable
     while (!isLegal){
-        if (isWhite == 1){
-            cout << "White to move. ";
-        }
-        else if (isWhite == -1){
-            cout << "Black to move. ";
-        }
-        else{
-            cout << "error detected." << endl;
-            break;
-        }
-        //
-        cout << "Input move (correct syntax, case-sensitive):" << endl;
-        cin >> move;
+        isLegal = Arbiter::SET_MOVE_LEGAL();
+        Arbiter::announceTurn(isWhite);
+        move = Player::getMove();
         if (move.length() < 5){ //
             if (!(isupper(move[0]))){ // pawn move.
-                isLegal = 1;
+                //isLegal = 1;
                 value = 1;
                 if(isWhite == 1){
                     pawnUpperBound = 9;
@@ -132,10 +128,7 @@ string Chessboard::move(int isWhite){
                 }
                 
                 if (move[1] == 'x'){ // if captures
-                    oldX = (int(move[0]) - 96);
-                    newX = (int(move[2]) - 96);
-                    newY = (int(move[3]) - 48);
-                    //cout << "ISWHITE + PAWNVAR = " << isWhite + pawnVar << endl;
+                    setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
                     for (int count = (newY+isWhite); count != (/*isWhite + */pawnVar); count -= isWhite){
                         if ((chessboard[oldX][count].parity == isWhite) && (chessboard[oldX][count].pieceValue == 1)){
                             oldY = count;
@@ -143,11 +136,10 @@ string Chessboard::move(int isWhite){
                             break;
                         }
                         else{
-                            //cout << "pawn not detected at Y level" << count << endl;
-                        }
+                            // pawn not detected at Y level.
                     }
-                    //cout << "you are playing pawn captures " << newX <<  newY << " or pawn captures on " << move[2] << move[3] << "." << endl; // DEBUGLINE
-                    //cout << "old:" << oldX << oldY << "\nnew: " << newX << newY << "\ndifference Y:" << abs(newY-oldY) << endl;
+                    }
+            //
                     if (chessboard[newX][newY].pieceValue == 0){ // cant capture nothing!
                         isLegal = AB.error(4);
                     }
@@ -161,12 +153,10 @@ string Chessboard::move(int isWhite){
                         cout << "illegal move: square " << move[0] << newY << " is not a possible destination for " << chessboard[oldX][oldY].pieceName << " on " << move[0] << oldY << endl;
                         isLegal = AB.error(2);
                     }
-                    
+                    //
                 } // end of captures.
                 else{ // or forward move.
-                    newX = (int(move[0]) - 96);
-                    newY = (int(move[1]) - 48);
-                    oldX = newX;
+                    setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
                     for (int count = newY; count != pawnVar; count -= isWhite){ // scanned to find the location of the old piece
                         if ((chessboard[newX][count].pieceValue == 1) && (chessboard[newX][count].parity == isWhite)){  // finding nearest pawn that is the one which is moved
                             oldY = count;
@@ -175,11 +165,6 @@ string Chessboard::move(int isWhite){
                         }
                     }
                     if ( !((pawnLowerBound < newY) and (newY < pawnUpperBound)) ){ // cant go beyond certain preset boundaries. goes for every pawn move.
-                        //cout << "illegal move: not between " << pawnLowerBound << " and " << pawnUpperBound << "." << endl;
-                        //cout << move[0] << move[1] << "not within allowed limits." << endl;
-                        //cout << "lower bound:" << pawnLowerBound << "upper bound:" << pawnUpperBound << endl;
-                        //cout << "error: " << "pawn lower bound is " << pawnLowerBound << " should be < newY = " << newY << endl;
-                        //cout << "error: " << "pawn upper bound is " << pawnUpperBound << " should be > newY = " << newY << endl;
                         isLegal = AB.error(2);
                     }
                     //cout << "\ndifference in Y values from new destination to old: " << abs(newY-oldY) << "\nstarting Y value: " << pawnVar+isWhite << "\nnewY:" << newY << "\noldY: " << oldY << "\npawn var: " << pawnVar << "\nis white (1 = white, -1 = black)" << isWhite << endl;
@@ -214,7 +199,7 @@ string Chessboard::move(int isWhite){
                 
                 if (move[0] == 'N'){ // knight move
                     // presets
-                    isLegal = 1;
+                    //isLegal = 1;
                     value = 3;
                     if(isWhite == 1){
                         piece = "WN";
@@ -228,39 +213,20 @@ string Chessboard::move(int isWhite){
                     // end of presets
                     
                     if (move[1] == 'x'){ // if captures
-                        newX = (int(move[2]) - 96);
-                        newY = (int(move[3]) - 48);
-                        cout << "you are planning knight captures on " << newX << newY << " or Nx" << move[2] << move[3] << "." << endl;
-                        isLegal = knight_moves(*this, newX, newY, isWhite, &oldX, &oldY); // basic movement vetting
-                        if (chessboard[newX][newY].pieceValue == 0){
-                            isLegal = AB.error(1);
-                        }
-                        else if (chessboard[newX][newY].parity == isWhite){
-                            isLegal = AB.error(4);
-                        }
-                        cout << "knight detected at " << oldX << oldY << "." << endl;
+                        setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
+                        isLegal = (Knight::knight_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
+                                | capture_vetting(*this, newX, newY, isWhite, &oldX, &oldY)); // basic movement vetting
                     }
                     else{ // or normal move
-                        newX = (int(move[1]) - 96);
-                        newY = (int(move[2]) - 48);
-                        cout << "you are planning knight " << newX << newY << " or N" << move[1] << move[2] << "." << endl;
-                        isLegal = knight_moves(*this, newX, newY, isWhite, &oldX, &oldY); // basic movement vetting
-                        if (chessboard[newX][newY].pieceValue != 0){ // if you move you cannot capture.
-                            isLegal = AB.error(1);
-                        }
-                        else if ((newX == oldX) && (newY == oldY)){ // cant attempt to move skip by staying in the same place
-                            isLegal = AB.error(3);
-                        }
-                        else if (chessboard[newX][newY].parity == isWhite){ // cant capture own pieces
-                            isLegal = AB.error(4);
-                        }
-                        cout << "knight detected at " << oldX << oldY << "." << endl;
+                        setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
+                        isLegal = (Knight::knight_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
+                                  | normal_vetting(*this, newX, newY, isWhite, &oldX, &oldY)); // basic movement vetting
                     }
                 } // end of knight move
                 
                 else if (move[0] == 'B'){ // bishop move
                     // presets
-                    isLegal = 1;
+                    //isLegal = 1;
                     value = 3.25;
                     if(isWhite == 1){
                         piece = "WB";
@@ -277,17 +243,22 @@ string Chessboard::move(int isWhite){
                         newX = (int(move[2]) - 96);
                         newY = (int(move[3]) - 48);
                         cout << "you are planning bishop captures on " << newX << newY << " or Bx" << move[2] << move[3] << "." << endl;
+                        isLegal = (Bishop::bishop_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
+                                  | capture_vetting(*this, newX, newY, isWhite, &oldX, &oldY));
                         
                     }
                     else{ // or normal move
                         newX = (int(move[1]) - 96);
                         newY = (int(move[2]) - 48);
                         cout << "you are planning bishop " << newX << newY << " or B" << move[1] << move[2] << "." << endl;
+                        isLegal = (Bishop::bishop_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
+                                |  normal_vetting(*this, newX, newY, isWhite, &oldX, &oldY)); // vetting bishop and normal moves
                     }
+                    cout << isLegal << endl;
                 } // end of bishop move
                 
                 else if (move[0] == 'R'){ // rook move
-                    isLegal = 1;
+                    //isLegal = 1;
                     value = 5;
                     if (move[1] == 'x'){ // if captures
                         newX = (int(move[2]) - 96);
@@ -302,7 +273,7 @@ string Chessboard::move(int isWhite){
                 } // end of rook move
                 
                 else if (move[0] == 'Q'){ // queen move
-                    isLegal = 1;
+                    //isLegal = 1;
                     value = 9;
                     if (move[1] == 'x'){ // if captures
                         newX = (int(move[2]) - 96);
@@ -316,7 +287,7 @@ string Chessboard::move(int isWhite){
                     }
                 } // end of queen move
                 else if (move[0] == 'K'){ // king move
-                    isLegal = 1;
+                    //isLegal = 1;
                     if (move[1] == 'x'){ // if captures
                         newX = (int(move[2]) - 96);
                         newY = (int(move[3]) - 48);
@@ -344,7 +315,7 @@ string Chessboard::move(int isWhite){
     // TODO: WRITE MOVE TO FILE
     
     
-    cout << oldX << oldY << endl;
+    cout << "REPLACING OLD PIECE AT " << oldX << oldY << endl;
     emptySquare(oldX, oldY);
     chessboard[newX][newY].define(1, isWhite, ((10*newY)+newX), piece, value);
     
@@ -353,35 +324,73 @@ string Chessboard::move(int isWhite){
 } // end of void move
 
 
-int Chessboard::knight_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY){ // function to calculate possible knight moves, obtain OldX and OldY values.
-    const static int offsets[][2]= {{-2,-1},{-2,1}, {-1,-2}, {-1, 2}, {1,-2}, {1,2}, {2,1}, {2,-1},};
-    for (int i = 0; i < 8; i++){ // take out invalid squares.
-        //cout << (newX+offsets[i][0]) << (newY+offsets[i][1]) << endl;
-        if ( (newX+offsets[i][0]) > 8  or (newX+offsets[i][0]) < 1 or (newY+offsets[i][1]) > 8 or (newY+offsets[i][1]) < 0 ){
-            //cout << (newX+offsets[i][0]) << (newY+offsets[i][1]) << endl;
-        }
-        else{ // scan for pieces.
-            //cout << "N" <<    char((newX+offsets[i][0])+96)   <<    (newY+offsets[i][1])    << endl;
-            /*if ((chessboard[(newX+offsets[i][0])][(newY+offsets[i][1])].parity == isWhite)){
-             cout << "white piece found at " << (newX+offsets[i][0]) << (newY+offsets[i][1]) << "." << endl;
-             }
-             if ((chessboard[(newX+offsets[i][0])][(newY+offsets[i][1])].pieceValue == 3)){
-             cout << "3.0 piece found at " << (newX+offsets[i][0]) << (newY+offsets[i][1]) << "." << endl;
-             }*/
-            if ((CB.chessboard[(newX+offsets[i][0])][(newY+offsets[i][1])].parity == isWhite) && (CB.chessboard[(newX+offsets[i][0])][(newY+offsets[i][1])].pieceValue == 3)){ // if knight
-                *oldX = (newX+offsets[i][0]);
-                *oldY = (newY+offsets[i][1]);
-                return 1;
-            }
-        } // end of else
-    } // end of for loop.
-    AB.error(2);
-    return 0;
+
+int Chessboard::capture_vetting(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY){
+    if (chessboard[newX][newY].pieceValue == 0){
+        return AB.error(1);
+    }
+    else if (chessboard[newX][newY].parity == isWhite){
+        return AB.error(4);
+    }
+    return 1;
 }
 
-int Chessboard::bishop_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY){
-    //for (int count == newX)
-    return 0;
+int Chessboard::normal_vetting(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int *oldX, int *oldY){
+    if (chessboard[newX][newY].pieceValue != 0){ // if you move you cannot capture.
+        return AB.error(1);
+    }
+    else if ((newX == *oldX) && (newY == *oldY)){ // cant attempt to move skip by staying in the same place
+        return AB.error(3);
+    }
+    else if (chessboard[newX][newY].parity == isWhite){ // cant capture own pieces
+        return AB.error(4);
+    }
+    return 1;
+}
+
+void Chessboard::setDestinationSquares(int pieceType, bool captures, int* newX, int* newY, int *oldX, int *oldY, string move, int isWhite){
+    int pawnVar = 0;
+    if (isWhite == 1){
+        pawnVar = 1;
+    }
+    else if (isWhite == -1){
+        pawnVar = 8;
+    }
+    switch(pieceType){
+        case 1: // pawn
+            if (captures){
+                *oldX = (int(move[0]) - 96);
+                *newX = (int(move[2]) - 96);
+                *newY = (int(move[3]) - 48);
+            }
+            else{
+                *newX = (int(move[0]) - 96);
+                *newY = (int(move[1]) - 48);
+                *oldX = *newX;
+                for (int count = *newY; count != pawnVar; count -= isWhite){ // scanned to find the location of the old piece
+                    if ((chessboard[*newX][count].pieceValue == 1) && (chessboard[*newX][count].parity == isWhite)){  // finding nearest pawn that is the one which is moved
+                        *oldY = count;
+                        cout << "pawn detected at " << move[0] << *oldY << "." << endl;
+                        break;
+                    }
+                }
+            }
+            break;
+        default: // everything else
+            if (captures){
+                *newX = (int(move[2]) - 96);
+                *newY = (int(move[3]) - 48);
+            }
+            else{
+                *newX = (int(move[1]) - 96);
+                *newY = (int(move[2]) - 48);
+            }
+            break;
+    }
+}
+
+void Chessboard::setPiecePresets(){
+    
 }
 
 

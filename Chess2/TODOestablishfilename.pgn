@@ -1,4 +1,13 @@
+[Result "1/2-1/2"] 
+[Termination "unterminated"] 
+[Date "2020.9.14"] 
+[Round "1"] 
+[WhiteElo "1000"] 
+[TimeControl "30+0"] 
+[Event "null"] 
+[Black "Player B"] 
+[BlackElo "1000"] 
+[Site "null"] 
 [White "Player A"]
 
-1. e4 e5 2. d4 d5 3. exd5 exd4 (null)
-
+1. e4 e5 2. d4 d5 3. b4 b5 

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		047E9E3925110C4500472B6B /* Pawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E3725110C4500472B6B /* Pawn.cpp */; };
+		047E9E3C25110E6700472B6B /* Knight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E3A25110E6700472B6B /* Knight.cpp */; };
+		047E9E3F25110EDF00472B6B /* Bishop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E3D25110EDF00472B6B /* Bishop.cpp */; };
+		047E9E4225110F0900472B6B /* Rook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4025110F0900472B6B /* Rook.cpp */; };
+		047E9E4525110F3C00472B6B /* Queen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4325110F3C00472B6B /* Queen.cpp */; };
+		047E9E4825110F5300472B6B /* King.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4625110F5300472B6B /* King.cpp */; };
 		049539CB248785200061D29D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539CA248785200061D29D /* main.cpp */; };
 		049539D3248785DA0061D29D /* Piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539D1248785DA0061D29D /* Piece.cpp */; };
 		04C9EBFE250DD29200D01513 /* pgnFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EBFC250DD29200D01513 /* pgnFile.cpp */; };
@@ -28,6 +34,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		047E9E3725110C4500472B6B /* Pawn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Pawn.cpp; sourceTree = "<group>"; };
+		047E9E3825110C4500472B6B /* Pawn.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pawn.hpp; sourceTree = "<group>"; };
+		047E9E3A25110E6700472B6B /* Knight.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Knight.cpp; sourceTree = "<group>"; };
+		047E9E3B25110E6700472B6B /* Knight.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Knight.hpp; sourceTree = "<group>"; };
+		047E9E3D25110EDF00472B6B /* Bishop.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bishop.cpp; sourceTree = "<group>"; };
+		047E9E3E25110EDF00472B6B /* Bishop.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bishop.hpp; sourceTree = "<group>"; };
+		047E9E4025110F0900472B6B /* Rook.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rook.cpp; sourceTree = "<group>"; };
+		047E9E4125110F0900472B6B /* Rook.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rook.hpp; sourceTree = "<group>"; };
+		047E9E4325110F3C00472B6B /* Queen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Queen.cpp; sourceTree = "<group>"; };
+		047E9E4425110F3C00472B6B /* Queen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Queen.hpp; sourceTree = "<group>"; };
+		047E9E4625110F5300472B6B /* King.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = King.cpp; sourceTree = "<group>"; };
+		047E9E4725110F5300472B6B /* King.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = King.hpp; sourceTree = "<group>"; };
 		049539C7248785200061D29D /* Chess2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess2; sourceTree = BUILT_PRODUCTS_DIR; };
 		049539CA248785200061D29D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		049539D1248785DA0061D29D /* Piece.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Piece.cpp; sourceTree = "<group>"; };
@@ -53,6 +71,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		047E9E4A25110FCE00472B6B /* piecefiles */ = {
+			isa = PBXGroup;
+			children = (
+				047E9E3725110C4500472B6B /* Pawn.cpp */,
+				047E9E3825110C4500472B6B /* Pawn.hpp */,
+				047E9E3A25110E6700472B6B /* Knight.cpp */,
+				047E9E3B25110E6700472B6B /* Knight.hpp */,
+				047E9E3D25110EDF00472B6B /* Bishop.cpp */,
+				047E9E3E25110EDF00472B6B /* Bishop.hpp */,
+				047E9E4025110F0900472B6B /* Rook.cpp */,
+				047E9E4125110F0900472B6B /* Rook.hpp */,
+				047E9E4325110F3C00472B6B /* Queen.cpp */,
+				047E9E4425110F3C00472B6B /* Queen.hpp */,
+				047E9E4625110F5300472B6B /* King.cpp */,
+				047E9E4725110F5300472B6B /* King.hpp */,
+			);
+			path = piecefiles;
+			sourceTree = "<group>";
+		};
+		047E9E4B25110FDC00472B6B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				049539CA248785200061D29D /* main.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		047E9E4C25110FEA00472B6B /* pgnsrc */ = {
+			isa = PBXGroup;
+			children = (
+				04C9EBFC250DD29200D01513 /* pgnFile.cpp */,
+				04C9EBFD250DD29200D01513 /* pgnFile.hpp */,
+			);
+			path = pgnsrc;
+			sourceTree = "<group>";
+		};
 		049539BE248785200061D29D = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +126,11 @@
 		049539C9248785200061D29D /* Chess2 */ = {
 			isa = PBXGroup;
 			children = (
-				049539CA248785200061D29D /* main.cpp */,
+				047E9E4C25110FEA00472B6B /* pgnsrc */,
+				047E9E4B25110FDC00472B6B /* src */,
+				047E9E4A25110FCE00472B6B /* piecefiles */,
 				049539D1248785DA0061D29D /* Piece.cpp */,
 				049539D2248785DA0061D29D /* Piece.hpp */,
-				04C9EBFC250DD29200D01513 /* pgnFile.cpp */,
-				04C9EBFD250DD29200D01513 /* pgnFile.hpp */,
 				04C9EBFF250E2E4800D01513 /* Chessboard.cpp */,
 				04C9EC00250E2E4800D01513 /* Chessboard.hpp */,
 				04C9EC05250E32DC00D01513 /* Arbiter.cpp */,
@@ -143,9 +197,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047E9E3C25110E6700472B6B /* Knight.cpp in Sources */,
+				047E9E3F25110EDF00472B6B /* Bishop.cpp in Sources */,
+				047E9E4525110F3C00472B6B /* Queen.cpp in Sources */,
 				049539D3248785DA0061D29D /* Piece.cpp in Sources */,
 				04C9EC07250E32DC00D01513 /* Arbiter.cpp in Sources */,
+				047E9E4225110F0900472B6B /* Rook.cpp in Sources */,
+				047E9E4825110F5300472B6B /* King.cpp in Sources */,
 				04C9EC01250E2E4800D01513 /* Chessboard.cpp in Sources */,
+				047E9E3925110C4500472B6B /* Pawn.cpp in Sources */,
 				04C9EBFE250DD29200D01513 /* pgnFile.cpp in Sources */,
 				049539CB248785200061D29D /* main.cpp in Sources */,
 				04C9EC04250E305600D01513 /* Player.cpp in Sources */,

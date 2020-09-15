@@ -1,4 +1,5 @@
 #include "Piece.hpp"
+#include "Pawn.hpp"
 
 Piece::Piece(){
     pieceType = 0;

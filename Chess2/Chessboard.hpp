@@ -15,13 +15,21 @@ public:
     Arbiter AB;
     
     void initialize();
-    void printBoard();
+    void printBoard() const;
     void emptySquare(int x, int y);
     
     
     void debug(std::string move);
     std::string move(int isWhite);
-    int knight_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int *oldY);
-    int bishop_moves(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY);
+    
+    void setDestinationSquares(int pieceType, bool captures, int* newX, int* newY, int* oldX, int *oldY, std::string move, int isWhite);
+    void setPiecePresets();
+        
+    
+    int capture_vetting(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY);
+    int normal_vetting(Chessboard CB, unsigned int newX, unsigned int newY, int isWhite, int* oldX, int* oldY);
+
+    
+    
 };
 #endif /* Chessboard_hpp */
