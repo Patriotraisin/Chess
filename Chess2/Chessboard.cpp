@@ -240,16 +240,14 @@ string Chessboard::move(int isWhite){
                     // end of presets
                     
                     if (move[1] == 'x'){ // if captures
-                        newX = (int(move[2]) - 96);
-                        newY = (int(move[3]) - 48);
+                        setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning bishop captures on " << newX << newY << " or Bx" << move[2] << move[3] << "." << endl;
                         isLegal = (Bishop::bishop_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
                                   | capture_vetting(*this, newX, newY, isWhite, &oldX, &oldY));
                         
                     }
                     else{ // or normal move
-                        newX = (int(move[1]) - 96);
-                        newY = (int(move[2]) - 48);
+                        setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning bishop " << newX << newY << " or B" << move[1] << move[2] << "." << endl;
                         isLegal = (Bishop::bishop_moves(AB, *this, newX, newY, isWhite, &oldX, &oldY)
                                 |  normal_vetting(*this, newX, newY, isWhite, &oldX, &oldY)); // vetting bishop and normal moves
@@ -261,13 +259,11 @@ string Chessboard::move(int isWhite){
                     //isLegal = 1;
                     value = 5;
                     if (move[1] == 'x'){ // if captures
-                        newX = (int(move[2]) - 96);
-                        newY = (int(move[3]) - 48);
+                        setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning rook captures on " << newX << newY << " or Rx" << move[2] << move[3] << "." << endl;
                     }
                     else{ // or normal move
-                        newX = (int(move[1]) - 96);
-                        newY = (int(move[2]) - 48);
+                        setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning rook " << newX << newY << " or R" << move[1] << move[2] << "." << endl;
                     }
                 } // end of rook move
@@ -276,33 +272,29 @@ string Chessboard::move(int isWhite){
                     //isLegal = 1;
                     value = 9;
                     if (move[1] == 'x'){ // if captures
-                        newX = (int(move[2]) - 96);
-                        newY = (int(move[3]) - 48);
+                        setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning Queen captures on " << newX << newY << " or Qx" << move[2] << move[3] << "." << endl;
                     }
                     else{ // or normal move
-                        newX = (int(move[1]) - 96);
-                        newY = (int(move[2]) - 48);
+                        setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
                         cout << "you are planning Queen " << newX << newY << " or Q" << move[1] << move[2] << "." << endl;
                     }
                 } // end of queen move
                 else if (move[0] == 'K'){ // king move
                     //isLegal = 1;
                     if (move[1] == 'x'){ // if captures
-                        newX = (int(move[2]) - 96);
-                        newY = (int(move[3]) - 48);
-                        cout << "you are planning king captures on " << newX << newY << " or Kx" << move[2] << move[3] << "." << endl;
+                        setDestinationSquares(value, 1, &newX, &newY, &oldX, &oldY, move, isWhite);
+                        //cout << "you are planning king captures on " << newX << newY << " or Kx" << move[2] << move[3] << "." << endl;
                     }
                     else{ // or normal move
-                        newX = (int(move[1]) - 96);
-                        newY = (int(move[2]) - 48);
-                        cout << "you are planning king " << newX << newY << " or K" << move[1] << move[2] << "." << endl;
+                        setDestinationSquares(value, 0, &newX, &newY, &oldX, &oldY, move, isWhite);
+                        //cout << "you are planning king " << newX << newY << " or K" << move[1] << move[2] << "." << endl;
                     }
                 } // end of king move
                 
                 else{ // invalid syntax move
-                    cout << "illegal move: invalid syntax" << endl;
-                    isLegal = 0;
+                    cout << "Illegal move: Invalid Syntax" << endl;
+                    isLegal = Arbiter::SET_MOVE_ILLEGAL();
                 } // invalid syntax
                 
             } // end of different piece moves.

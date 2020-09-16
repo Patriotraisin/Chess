@@ -5,6 +5,7 @@
 class pgnFile {
     int result;
     bool gameTerminated;
+    std::string gameLog;
     // date
     int round;
     unsigned int whiteELO, blackELO;
@@ -16,7 +17,9 @@ public:
     pgnFile();
     void setRound(int);
     
-    void saveGame(std::string);
+    void saveGame();
+    void APPEND_TO_GAMELOG(std::string);
+    void printGameLog();
 };
 
 #endif /* pgnFile_hpp */

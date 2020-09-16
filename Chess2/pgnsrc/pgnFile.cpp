@@ -2,7 +2,7 @@
 #include <fstream>
 #include <ctime>
 #include <string>
-
+#include <iostream>
 
 pgnFile::pgnFile(){
     result = 0;
@@ -22,7 +22,7 @@ void pgnFile::setRound(int gameRound){
     round = gameRound;
 }
 
-void pgnFile::saveGame(std::string gameLog){
+void pgnFile::saveGame(){
     time_t now = time(0);
     tm *ltm = localtime(&now);
     // TODO:
@@ -60,4 +60,11 @@ void pgnFile::saveGame(std::string gameLog){
     // throw exception if issue found
 }
 
+void pgnFile::APPEND_TO_GAMELOG(std::string x){
+    gameLog.append(x);
+}
+
+void pgnFile::printGameLog(){
+    std::cout << gameLog << std::endl;
+}
 

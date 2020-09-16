@@ -12,6 +12,7 @@
 
 #define MOVES 3
 
+
 #include <iostream>
 #include <string>
 #include <cctype>
@@ -26,34 +27,40 @@ using namespace std;
 // global variable chessboard; other variables
 Chessboard CB;
 int moveCounter = 1;
+
+//functions
+inline bool MOVELIMITREACHED();
+
 // main function
 int main() {
-    string gameLog = "";
-    //
     int gameEnded = 0;
     CB.initialize();
     pgnFile pgnObject;
     //
     CB.printBoard();
     //
-    //cout << gameEnded << "D" << endl;
-    while (gameEnded == 0){
-        gameLog.append(to_string(moveCounter) + ". ");
-        gameLog.append(CB.move(1) + " ");
+    while (!gameEnded){
+        pgnObject.APPEND_TO_GAMELOG(to_string(moveCounter) + ". ");
+        pgnObject.APPEND_TO_GAMELOG(CB.move(1) + " ");
         CB.printBoard();
-        gameLog.append(CB.move(-1) + " ");
+        pgnObject.APPEND_TO_GAMELOG(CB.move(-1) + " ");
         CB.printBoard();
         ++moveCounter;
         //
-        if (moveCounter == (MOVES+1)){
+        if (MOVELIMITREACHED()){
             gameEnded = 1;
         }
         //
     }
-    cout << gameLog << endl;
-    pgnObject.saveGame(gameLog);
+    pgnObject.printGameLog();
+    pgnObject.saveGame();
     //
     return 0;
 }
+
+inline bool MOVELIMITREACHED(){
+    return (moveCounter == (MOVES+1));
+}
+
 
 
