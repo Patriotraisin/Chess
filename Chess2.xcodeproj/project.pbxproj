@@ -13,6 +13,7 @@
 		047E9E4225110F0900472B6B /* Rook.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4025110F0900472B6B /* Rook.cpp */; };
 		047E9E4525110F3C00472B6B /* Queen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4325110F3C00472B6B /* Queen.cpp */; };
 		047E9E4825110F5300472B6B /* King.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4625110F5300472B6B /* King.cpp */; };
+		047E9E4F2515C4C700472B6B /* Square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 047E9E4D2515C4C700472B6B /* Square.cpp */; };
 		049539CB248785200061D29D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539CA248785200061D29D /* main.cpp */; };
 		049539D3248785DA0061D29D /* Piece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 049539D1248785DA0061D29D /* Piece.cpp */; };
 		04C9EBFE250DD29200D01513 /* pgnFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 04C9EBFC250DD29200D01513 /* pgnFile.cpp */; };
@@ -46,6 +47,8 @@
 		047E9E4425110F3C00472B6B /* Queen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Queen.hpp; sourceTree = "<group>"; };
 		047E9E4625110F5300472B6B /* King.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = King.cpp; sourceTree = "<group>"; };
 		047E9E4725110F5300472B6B /* King.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = King.hpp; sourceTree = "<group>"; };
+		047E9E4D2515C4C700472B6B /* Square.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Square.cpp; sourceTree = "<group>"; };
+		047E9E4E2515C4C700472B6B /* Square.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Square.hpp; sourceTree = "<group>"; };
 		049539C7248785200061D29D /* Chess2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess2; sourceTree = BUILT_PRODUCTS_DIR; };
 		049539CA248785200061D29D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		049539D1248785DA0061D29D /* Piece.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Piece.cpp; sourceTree = "<group>"; };
@@ -129,8 +132,10 @@
 				047E9E4C25110FEA00472B6B /* pgnsrc */,
 				047E9E4B25110FDC00472B6B /* src */,
 				047E9E4A25110FCE00472B6B /* piecefiles */,
-				049539D1248785DA0061D29D /* Piece.cpp */,
+				047E9E4D2515C4C700472B6B /* Square.cpp */,
+				047E9E4E2515C4C700472B6B /* Square.hpp */,
 				049539D2248785DA0061D29D /* Piece.hpp */,
+				049539D1248785DA0061D29D /* Piece.cpp */,
 				04C9EBFF250E2E4800D01513 /* Chessboard.cpp */,
 				04C9EC00250E2E4800D01513 /* Chessboard.hpp */,
 				04C9EC05250E32DC00D01513 /* Arbiter.cpp */,
@@ -199,6 +204,7 @@
 			files = (
 				047E9E3C25110E6700472B6B /* Knight.cpp in Sources */,
 				047E9E3F25110EDF00472B6B /* Bishop.cpp in Sources */,
+				047E9E4F2515C4C700472B6B /* Square.cpp in Sources */,
 				047E9E4525110F3C00472B6B /* Queen.cpp in Sources */,
 				049539D3248785DA0061D29D /* Piece.cpp in Sources */,
 				04C9EC07250E32DC00D01513 /* Arbiter.cpp in Sources */,

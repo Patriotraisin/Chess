@@ -11,7 +11,7 @@ public:
     
     Chessboard();
     
-    Piece chessboard[8][8];
+    Piece chessboard[9][9];
     Arbiter AB;
     
     void initialize();
